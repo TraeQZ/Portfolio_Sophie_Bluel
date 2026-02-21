@@ -1,6 +1,10 @@
 //Configuration et Sélection d'Éléments
 const apiUrlWorks = 'http://localhost:5678/api/works';
-const galleryContainer = document.querySelector(".gallery"); 
+const apiUrlCategories = 'http://localhost:5678/api/categories';
+const galleryContainer = document.querySelector(".gallery");
+const filtersContainer = document.querySelector(".filters");
+
+
 
 // Variable pour stocker TOUS les travaux
 let allWorks = [];
@@ -21,20 +25,52 @@ function createWorkElement(work) {
     figure.appendChild(figcaption);
     return figure;
 }
+function displayWorks(categoryId) {
+galleryContainer.innerHTML = "";
+    // Déterminer la liste à afficher selon l ID:
+    // Si c'est 0 : C'est le bouton 'Tous', 
+    // donc je prends la liste complète (allWorks).
+   //Sinon : Je passe la liste au filter pour ne garder que les projets dont la catégorie correspond exactement au numéro demandé."
 
-function displayWorks() {
-    galleryContainer.innerHTML = "";
+    const worksToDisplay = (categoryId === 0) 
+        ? allWorks // Si ID est 0 (Tous), on prend toutes les données.
+        : allWorks.filter(work => work.categoryId === categoryId); // Sinon, on filtre.
     
-    // Afficher tous les travaux stockés
-    if (allWorks.length > 0) {
-        allWorks.forEach(work => {
+    //  Afficher les travaux filtrés
+    //Pour chaque projet trouvé dans ma liste triée :
+
+    //Je fabrique son 'element' HTML (le titre et l'image) grâce à l'autre fonction (createWorkElement).
+
+    if (worksToDisplay.length > 0) {
+        worksToDisplay.forEach(work => {
             const workElement = createWorkElement(work); 
             galleryContainer.appendChild(workElement);
         });
     } else {
-        galleryContainer.innerHTML = `<p style="text-align: center;">Aucun travail trouvé.</p>`;
+        galleryContainer.innerHTML = `<p style="text-align: center;">Aucun travail trouvé dans cette catégorie.</p>`;
     }
 }
+// Logique de Création des Boutons de Filtre
+
+function createFilterButton(name, categoryId) {
+    const button = document.createElement("button");
+    button.classList.add("filter-button");
+    button.textContent = name;
+    button.dataset.categoryId = categoryId;
+
+    // Gestion du clic sur le bouton
+    button.addEventListener('click', () => {
+        // Gérer l'état "actif" (pour le style)
+        document.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('active-filter'));
+        button.classList.add('active-filter'); 
+
+        // Lancer l'affichage filtré !
+        displayWorks(categoryId); 
+    });
+    
+    return button;
+}
+
 
 // Fonction Principale d'Initialisation 
 async function initializePortfolio() {
@@ -45,10 +81,27 @@ async function initializePortfolio() {
             throw new Error(`Erreur HTTP travaux!`);
         }
         allWorks = await worksResponse.json(); // <-- Stockage des données
-        
+// TÉLÉCHARGEMENT : des catégories
+        const categoriesResponse = await fetch(apiUrlCategories);
+        if (!categoriesResponse.ok) {//SI la réponse du serveur n'est PAS positive
+            throw new Error(`Erreur HTTP catégories!`);
+        }
+        const categories = await categoriesResponse.json();        
         // AFFICHAGE INITIAL
-        displayWorks(); 
+        displayWorks(0); // Affiche tous les travaux au départ (ID 0 pour "Tous")
+//CRÉATION DES FILTRES
+        filtersContainer.innerHTML = '';
+        
+        //Bouton "Tous"
+        const allButton = createFilterButton("Tous", 0);
+        filtersContainer.appendChild(allButton);
+        allButton.classList.add('active-filter'); // Actif par défaut
 
+        //Boutons des catégories
+        categories.forEach(category => {
+            const button = createFilterButton(category.name, category.id);
+            filtersContainer.appendChild(button);
+        });
     } catch (error) {
         console.error("Échec critique de l'initialisation du portfolio :", error);
         if (galleryContainer) {

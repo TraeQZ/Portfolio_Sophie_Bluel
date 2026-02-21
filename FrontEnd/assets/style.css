@@ -185,4 +185,42 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+.filters {
+	width: 585px; 
+    height: 38px;
+    
+    /* Centrage horizontal */
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* Positionnement vertical et espace entre les éléments */
+    display: flex; 
+    justify-content: center;
+    align-items: center; /* Assure que les boutons sont bien centrés verticalement */
+    gap: 20px; /* Espace entre les boutons */
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+/* 2. Style par défaut de TOUS les boutons */
+.filter-button {
+    font-family: 'Syne', sans-serif; 
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%; /* Assure une hauteur de ligne compacte */
+    text-align: center;
+    height: 37px;
+    border: 1px solid #1D6154; 
+    border-radius: 60px; 
+    
+    color: #1D6154; 
+    background-color: white; 
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s;
 
+    line-height: 37px;
+}
+.filter-button.active-filter {
+    color: white; 
+    background-color: #1D6154; 
+    border-color: #1D6154;
+}
