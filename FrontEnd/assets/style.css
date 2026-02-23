@@ -343,3 +343,39 @@ body {
     justify-content: center; 
     z-index: 2000;
 }
+/*  Le conteneur (fond sombre) */
+#modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); 
+    display: none; /* Changé en 'flex' par le JS */
+    align-items: center;    
+    justify-content: center;
+    z-index: 2000;
+}
+/*  La boîte blanche (le contenu) */
+.modal-wrapper {
+    background-color: white;
+    width: 630px;
+    height: 688px;
+    border-radius: 10px;
+    
+    padding: 60px 100px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-sizing: border-box; /* Pour que le padding ne dépasse pas des 630px */
+}
+/*  Le bouton de fermeture  */
+#modal-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+}

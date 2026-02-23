@@ -12,6 +12,8 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="gallery.js" defer></script>
 	<script src="login.js" defer></script>
+	<script src="modal.js" defer></script>
+
 
 </head>
 <body>
@@ -30,6 +32,35 @@
 		</ul>
 	</nav>
 </header>
+<aside id="modal-container" class="modal" style="display: none;" aria-hidden="true" role="dialog">
+	<div class="modal-wrapper">
+        <div class="modal-nav">
+            <button id="modal-back" class="js-modal-btn" style="visibility: hidden;">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <button id="modal-close" class="js-modal-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+		<div id="modal-view-gallery" class="modal-view">
+            <h3>Galerie photo</h3>
+            <div class="modal-gallery-grid">
+                </div>
+            <hr>
+            <button id="btn-go-to-add" class="btn-main">Ajouter une photo</button>
+        </div>
+		<div id="modal-view-add" class="modal-view" style="display: none;">
+            <h3>Ajout photo</h3>
+            <form id="form-add-work">
+                <div class="upload-area">
+    <div id="upload-design-content">
+        <i class="fa-regular fa-image"></i>
+        <label for="file-upload" class="label-file">+ Ajouter photo</label>
+        <input type="file" id="file-upload" accept="image/png, image/jpeg" hidden>
+        <p>jpg, png : 4mo max</p>
+    </div>
+	</div>
+</aside>
 <main>
 	<section id="introduction">
 		<figure>
