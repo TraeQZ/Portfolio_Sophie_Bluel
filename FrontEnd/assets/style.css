@@ -379,3 +379,226 @@ body {
     cursor: pointer;
     font-size: 20px;
 }
+/* Le titre et la galerie */
+.modal-wrapper h3 {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+    margin-bottom: 45px;
+}
+
+.modal-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px 10px;
+    margin-top: 10px;
+    margin-bottom: 45px;
+    padding-bottom: 45px;
+    border-bottom: 1px solid #B3B3B3;
+    overflow-y: auto;
+    overflow-x: hidden; /* ← ajoute juste cette ligne */
+    max-height: 400px;
+}
+
+.modal-figure {
+    position: relative;
+    width: 78.12px;
+    height: 104.08px;
+}
+
+.modal-figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.btn-main, #btn-go-to-add {
+    background-color: #1D6154;
+    color: white;
+    border: none;
+    border-radius: 60px;
+    padding: 10px 50px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0 auto; /* Centre le bouton horizontalement */
+    display: block;
+    width: fit-content;
+}
+.btn-main:hover {
+    background-color: #0E2F28; /* Un peu plus sombre au survol */
+}
+/* Le carré noir qui contient l'icône */
+.delete-icon {
+    /* Dimensions exactes du rectangle noir */
+    width: 17px;
+    height: 17px;
+    background-color: black;
+    color: white;
+    border-radius: 2px;
+
+    /* Positionnement par rapport à la miniature */
+    position: absolute;
+    top: 6px; 
+    right: 6px;
+
+    /* Centrage de l'icône de la poubelle à l'intérieur */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+}
+.delete-icon i {
+    /* Dimensions de l'icône à l'intérieur du carré */
+    width: 9px;
+    height: 10.28px;
+    font-size: 10px; /* Ajustement de la taille de police FontAwesome */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+hr {display:none}
+/* =====================Modale d'ajout============================ */
+.modal-wrapper {
+    width: 630px;
+    height: 670px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 30px 100px; /* Ajuste le padding pour centrer le contenu */
+    box-sizing: border-box;
+}
+.upload-area {
+    width: 420px;
+    height: 169px;
+    background: #E8F1F6;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px auto;
+     /* Centrage horizontal */
+     position: relative;
+     overflow: hidden;
+}
+/* L'icône de montagne (76x76) */
+.upload-area i {
+    width: 76px;
+    height: 76px;
+    font-size: 76px; /* Taille pour l'icône FontAwesome */
+    color: #B9C5CC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-main {
+    width: 237px;
+    height: 36px;
+    border-radius: 60px;
+    border: none;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 0 auto; /* Pour le centrer */
+    background: #1D6154; /* Couleur par défaut (actif) */
+}
+/* État désactivé selon tes données Figma */
+.btn-main:disabled {
+    background: #A7A7A7;
+    cursor: not-allowed;
+}
+#work-title, #work-category {
+    width: 420px;
+    height: 51px; /* Hauteur standard pour ce projet */
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    margin-bottom: 20px;
+}
+#modal-back {
+    width: 21px;
+    height: 21px;
+    font-size: 21px; /* Pour que l'icône FontAwesome prenne la taille demandée */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000; /* Ou la couleur de ton choix */
+    
+    /* Positionnement dans la barre de navigation de la modale */
+    position: absolute;
+    top: 26px;  /* Ajusté pour être harmonieux avec tes 686px Figma par rapport au haut de la modale */
+    left: 30px; /* Ajusté pour correspondre à tes 435px Figma par rapport au bord gauche */
+}
+
+/* On s'assure que l'icône à l'intérieur suit la taille */
+#modal-back i {
+    width: 21px;
+    height: 21px;
+}
+.input-group input:focus, 
+.input-group select:focus {
+    outline: none;
+}
+#work-category {
+    border: none !important; 
+    outline: none; 
+}
+
+.upload-area i, 
+.upload-area p, 
+.upload-area #upload-design-content {
+    pointer-events: none; /* Le clic "traverse" ces éléments pour atteindre le label */
+}
+
+.label-file {
+    pointer-events: auto; /* On s'assure que le label, lui, reçoit bien le clic */
+    cursor: pointer;
+}
+/* L'image d'aperçu doit remplir le conteneur sans le déformer */
+.hidden-content {
+    display: none !important;
+}
+
+/* Style de l'image d'aperçu pour correspondre à tes dimensions */
+.preview-img {
+    max-width: 129px;
+    max-height: 193px;
+    object-fit: cover;
+}
+/* Style du bouton valider quand il est actif */
+.btn-main:not(:disabled) {
+    background-color: #1D6154 !important;
+    cursor: pointer;
+}
+.upload-area {
+    position: relative;            
+    overflow: hidden;              
+}
+#upload-design-content {
+    display: flex;                 /* organisation verticale */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+#preview-container {
+    width: 100%;
+    height: 100%;
+    display: none;                 /* centre l’image */
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    inset: 0;
+}
+/* Quand une image est affichée, on cache le texte */
+.upload-area.has-preview #upload-design-content {
+    display: none;
+}
