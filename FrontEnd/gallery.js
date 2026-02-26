@@ -4,8 +4,6 @@ const apiUrlCategories = 'http://localhost:5678/api/categories';
 const galleryContainer = document.querySelector(".gallery");
 const filtersContainer = document.querySelector(".filters");
 
-
-
 // Variable pour stocker TOUS les travaux
 let allWorks = [];
 
@@ -26,13 +24,14 @@ function createWorkElement(work) {
     return figure;
 }
 function displayWorks(categoryId) {
+     //nettoyage de la galerie avant d'afficher les nouveaux projets.
 galleryContainer.innerHTML = "";
     // Déterminer la liste à afficher selon l ID:
     // Si c'est 0 : C'est le bouton 'Tous', 
     // donc je prends la liste complète (allWorks).
    //Sinon : Je passe la liste au filter pour ne garder que les projets dont la catégorie correspond exactement au numéro demandé."
 
-    const worksToDisplay = (categoryId === 0) 
+    const worksToDisplay = (categoryId === 0) //condition ternaire (if/else)
         ? allWorks // Si ID est 0 (Tous), on prend toutes les données.
         : allWorks.filter(work => work.categoryId === categoryId); // Sinon, on filtre.
     
@@ -78,13 +77,13 @@ async function initializePortfolio() {
         // TÉLÉCHARGEMENT : des travaux
         const worksResponse = await fetch(apiUrlWorks);
         if (!worksResponse.ok) {
-            throw new Error(`Erreur HTTP travaux!`);
+            throw new Error(`Erreur travaux!`);
         }
         allWorks = await worksResponse.json(); // <-- Stockage des données
 // TÉLÉCHARGEMENT : des catégories
         const categoriesResponse = await fetch(apiUrlCategories);
         if (!categoriesResponse.ok) {//SI la réponse du serveur n'est PAS positive
-            throw new Error(`Erreur HTTP catégories!`);
+            throw new Error(`Erreur catégories!`);
         }
         const categories = await categoriesResponse.json();        
         // AFFICHAGE INITIAL
@@ -105,7 +104,7 @@ async function initializePortfolio() {
     } catch (error) {
         console.error("Échec critique de l'initialisation du portfolio :", error);
         if (galleryContainer) {
-            galleryContainer.innerHTML = `<p style="text-align: center; color: red;">Échec du chargement. Vérifiez que le serveur backend est lancé.</p>`;
+            galleryContainer.innerHTML = `<p style="text-align: center; color: red;">Échec du chargement.</p>`;
         }
     }
 }

@@ -26,6 +26,7 @@ document.addEventListener('click', (e) => {
 const closeModal = function () {
     const modal = document.getElementById('modal-container');
     if (modal) {
+        document.activeElement.blur();
         modal.style.display = "none";
         modal.setAttribute('aria-hidden', 'true');
     }
